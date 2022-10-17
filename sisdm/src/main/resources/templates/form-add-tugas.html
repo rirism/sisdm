@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Tugas</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Tambah Tugas</h2>
+                <br>
+                <form th:action="@{/tambah-tugas}" th:object="${tugas}" method="POST">
+                    <div class="form-group">
+                        <label>Nama Tugas</label>
+                        <input type="text" class="form-control" name="namaTugas" placeholder="Nama Tugas">
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea class="form-control" name="deskripsiTugas" rows="3" placeholder="Deskripsi"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Story Point</label>
+                            <input type="text" class="form-control" name="storyPoint" placeholder="Story Point">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Status</label>
+                            <select name="statusTugas" class="form-control">
+                                <option value="0">Dimulai</option>
+                                <option value="1">Dikerjakan</option>
+                                <option value="2">Selesai</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" style="background: #e01c5c">Submit</button>
+                    <a href="/" class="btn btn-secondary">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<div th:include="fragments/fragment :: footer" style="margin-top: 15px;"></div>
+</html>

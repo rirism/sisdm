@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter Tugas</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4 border-0">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <a href="/"><i class='fas fa-arrow-left' style='font-size:24px'></i></a>
+                        </div>
+                        <div class="col-sm" style="text-align: center">
+                            <h2 style="text-align: center">Filter Tugas</h2>
+                            <p style="color: #e01c5c">Berdasarkan Nama Karyawan dan Status Tugas</p>
+                        </div>
+                        <div class="col-sm" style="text-align: right">
+                        </div>
+                    </div>
+                </div>
+                <div class="card m-4 p-4">
+                    <div class="card-body">
+                        <div class="justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center container ">
+                                <div class="row">
+                                    <form class="form-inline my-2 my-lg-0" th:action="@{/filter-tugas}" method="GET">
+                                        <div class="container card-body d-flex flex-column align-items-center">
+                                            <p style="text-align: center; font-weight: bold">Nama Karyawan:</p>
+                                            <select class="form-control" name="idKaryawan">
+                                                <option selected disabled value="" style="color: grey"><span style="color: #a9a9a9">Nama Karyawan</span></option>
+                                                <option th:each="karyawan : ${listKaryawan}"
+                                                        th:value="${karyawan.idKaryawan}"
+                                                        th:utext="${karyawan.namaDepan} + ' ' + ${karyawan.namaBelakang}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="container card-body d-flex flex-column align-items-center">
+                                            <p style="text-align: center; font-weight: bold">Status Tugas:</p>
+                                            <select class="form-control" name="statusTugas">
+                                                <option selected disabled value="0" style="color: grey"><span style="color: #a9a9a9">Status Tugas</span></option>
+                                                <option value="0">Dimulai</option>
+                                                <option value="1">Dikerjakan</option>
+                                                <option value="2">Selesai</option>
+                                            </select>
+                                        </div>
+                                        <div class="container card-body d-flex flex-column align-items-center">
+                                            <button class="btn btn-primary my-2 my-sm-0" type="submit" style="float: right; margin-left: 3%;">Cari</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card m-3 p-3">
+                                <div class="card-body">
+                                    <h4>Data Karyawan</h4>
+                                    <table class="table table-striped text-center">
+                                        <thead style="color: #2C4B75">
+                                        <tr style="color: dodgerblue">
+                                            <th>No</th>
+                                            <th>Nama Tugas</th>
+                                            <th>Story Point</th>
+                                            <th>Deskripsi</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="tugas, iterationStatus : ${listTugas}" style="color: grey">
+                                            <td th:text="${iterationStatus.count}"></td>
+                                            <td th:text="${tugas.namaTugas}"></td>
+                                            <td th:text="${tugas.storyPoint}"></td>
+                                            <td th:text="${tugas.deskripsiTugas}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div th:include="fragments/fragment :: footer" style="margin-top: 15px;"></div>
+</body>
+</html>

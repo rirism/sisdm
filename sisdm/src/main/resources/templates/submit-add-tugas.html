@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+
+<div class="container">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-6 mx-auto mt-5">
+                <div class="card shadow border">
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <p style="font-weight: bold">Tugas dengan nama <span style="color: #e01c5c " th:text="${tugas.namaTugas}"></span> berhasil ditambahkan.</p>
+                        <a href="/" class="btn btn-primary" style="background: #e01c5c">Kembali</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h2 ></h2>
+</body>
+<div th:include="fragments/fragment :: footer" style="margin-top: 15px;"></div>
+</html>

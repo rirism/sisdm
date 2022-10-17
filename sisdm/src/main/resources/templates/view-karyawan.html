@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Karyawan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4 border-0">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <a href="/karyawan"><i class='fas fa-arrow-left' style='font-size:24px'></i></a>
+                        </div>
+                        <div class="col-sm" style="text-align: center">
+                            <h2 style="text-align: center">Detail Karyawan</h2>
+                        </div>
+                        <div class="col-sm" style="text-align: right">
+                            <a type="button" class="btn btn-warning">Edit</a>
+                            <a type="button" class="btn btn-danger" th:href="@{/karyawan/} + ${karyawan.idKaryawan} + @{/hapus}">Hapus</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card m-4 p-4">
+                    <div class="card-body">
+                        <div class="justify-content-center">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-4">
+                                        <span style="font-weight: bold; color: dodgerblue">Nama</span>
+                                        <br>
+                                        <a th:text="${karyawan.namaDepan + ' ' + karyawan.namaBelakang}"></a>
+                                    </div>
+                                    <div class="col-4">
+                                        <span style="font-weight: bold; color: dodgerblue">Jenis Kelamin</span>
+                                        <br>
+                                        <a th:if="${karyawan.jenisKelamin == 1}">Laki-laki</a>
+                                        <a th:if="${karyawan.jenisKelamin == 2}">Perempuan</a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row justify-content-center">
+                                    <div class="col-4">
+                                        <span style="font-weight: bold; color: dodgerblue">Tanggal Lahir</span>
+                                        <br>
+                                        <a th:text="${#calendars.format(new java.util.Date(karyawan.tanggalLahir), 'dd MMMM yyyy')}"></a>
+                                    </div>
+                                    <div class="col-4">
+                                        <span style="font-weight: bold; color: dodgerblue">Email</span>
+                                        <br>
+                                        <a th:text="${karyawan.emailKaryawan}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card m-3 p-3">
+                                <div class="card-body">
+                                    <h4>Daftar Sertifikasi</h4>
+                                    <table class="table table-striped text-center">
+                                        <thead style="color: #2C4B75;">
+                                        <tr style="color: dodgerblue">
+                                            <th>No</th>
+                                            <th>Nama Sertifikasi</th>
+                                            <th>No Sertifikasi</th>
+                                            <th>Tanggal Pengambilan</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="sertifikasiKaryawan, iterationStatus : ${listSertifikasiKaryawan}" style="color: grey">
+                                            <td th:text="${iterationStatus.count}"></td>
+                                            <td th:text="${sertifikasiKaryawan.sertifikasi.namaSertifikasi}"></td>
+                                            <td th:text="${sertifikasiKaryawan.noSertifikasi}"></td>
+                                            <td th:text="${#calendars.format(new java.util.Date(sertifikasiKaryawan.tanggalPengambilan), 'dd MMMM yyyy')}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div th:include="fragments/fragment :: footer" style="margin-top: 15px;"></div>
+</body>
+</html>
